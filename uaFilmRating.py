@@ -11,16 +11,20 @@ def readNotes():
 
 
 def addNote(film_name: str, note: str, rating: int):
-    fieldnames = ['film_name', 'note', 'rating']
-    with open('uaFilms.csv', 'a', newline='') as file:
-        writer = csv.DictWriter(file, delimiter=';', fieldnames=fieldnames)
-        writer.writerow(
-            {'film_name': film_name, 'note': note, 'rating': rating}
-        )
+    if rating in range(1, 6):
+        fieldnames = ['film_name', 'note', 'rating']
+        with open('uaFilms.csv', 'a', newline='') as file:
+            writer = csv.DictWriter(file, delimiter=';', fieldnames=fieldnames)
+            writer.writerow(
+                {'film_name': film_name, 'note': note, 'rating': rating}
+            )
+    else:
+        print('Rating should be in range 1-5, you have {} instead'.format(rating))
 
 
 def removeNote(index: int):
     data = pd.read_csv('uaFilms.csv', delimiter=';', index_col='FilmName', names=['FilmName', 'Note', 'Rating'])
     data = data.drop(data.index[index])
     print(data)
+
 
