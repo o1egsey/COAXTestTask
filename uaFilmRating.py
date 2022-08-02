@@ -28,3 +28,37 @@ def removeNote(index: int):
     print(data)
 
 
+def getAverageRating():
+    sum = 0
+    counter =0
+    with open('uaFilms.csv', 'r') as file:
+        fieldnames = ['film_name', 'note', 'rating']
+        reader = csv.DictReader(file, delimiter=';', fieldnames=fieldnames)
+        for row in reader:
+            sum += int(row['rating'])
+            counter += 1
+    avgr = sum/counter
+    print('Average rating:' + str(avgr))
+
+
+def getMaxRating():
+    with open('uaFilms.csv', 'r') as file:
+        fieldnames = ['film_name', 'note', 'rating']
+        reader = csv.DictReader(file, delimiter=';', fieldnames=fieldnames)
+        ratingList = []
+        for row in reader:
+            ratingList.append(int(row['rating']))
+        print('Max rating: ' + str(max(ratingList)))
+
+
+def getMinRating():
+    with open('uaFilms.csv', 'r') as file:
+        fieldnames = ['film_name', 'note', 'rating']
+        reader = csv.DictReader(file, delimiter=';', fieldnames=fieldnames)
+        ratingList = []
+        for row in reader:
+            ratingList.append(int(row['rating']))
+        print('Min rating: ' + str(min(ratingList)))
+
+
+
